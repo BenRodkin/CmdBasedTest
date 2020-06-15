@@ -28,11 +28,11 @@ public class Drive implements Subsystem {
     }
 
     // Interface methods
-    public void setPower(double leftPower, double rightPower) {
-        flPower = leftPower;
-        frPower = leftPower;
-        rlPower = rightPower;
-        rrPower = rightPower;
+    public void setPower(double flPower, double frPower, double rlPower, double rrPower) {
+        this.flPower = flPower;
+        this.frPower = frPower;
+        this.rlPower = rlPower;
+        this.rrPower = rrPower;
     }
 
     @Override

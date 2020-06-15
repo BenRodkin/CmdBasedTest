@@ -19,20 +19,25 @@ public class TeleOpDriveControl implements Command {
 
     @Override
     public void start() {
-        drive.setPower(0,0);
+        drive.setPower(0,0, 0,0);
     }
 
     @Override
     public void periodic() {
+        double dri = -gamepad.left_stick_y;
+        double str = gamepad.left_stick_x;
+        double twi = -gamepad.right_stick_x;
         drive.setPower(
-                -gamepad.left_stick_y + gamepad.right_stick_x,
-                -gamepad.left_stick_y - gamepad.right_stick_x
+                (dri + str + twi) * 1,
+                (dri - str - twi) * 1,
+                (dri - str + twi) * 1,
+                (dri + str - twi) * 1
         );
     }
 
     @Override
     public void stop() {
-        drive.setPower(0,0);
+        drive.setPower(0,0,0,0);
     }
 
     @Override
