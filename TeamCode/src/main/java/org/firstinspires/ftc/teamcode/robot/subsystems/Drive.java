@@ -10,6 +10,9 @@ public class Drive implements Subsystem {
     // Hardware map
     private HardwareMap hardwareMap;
 
+    private final double SLOW = 0.6;
+    private final double FAST = 1.0;
+
     // Components
     private DcMotor flDrive;
     private DcMotor frDrive;
@@ -21,6 +24,10 @@ public class Drive implements Subsystem {
     private double frPower = 0;
     private double rlPower = 0;
     private double rrPower = 0;
+    private double goSlow = FAST;
+
+
+
 
     // Constructor
     public Drive(HardwareMap hardwareMap) {

@@ -11,8 +11,10 @@ public class TeleOpDriveControl implements Command {
     // Input
     private Gamepad gamepad;
 
+    private final double TRIGGER_THRESHOLD = 0.7;
+
     // Constructor
-    public TeleOpDriveControl(Drive drive, Gamepad gamepad){
+    public TeleOpDriveControl(Drive drive, Gamepad gamepad) {
         this.drive = drive;
         this.gamepad = gamepad;
     }
@@ -27,12 +29,10 @@ public class TeleOpDriveControl implements Command {
         double dri = -gamepad.left_stick_y;
         double str = gamepad.left_stick_x;
         double twi = -gamepad.right_stick_x;
-        drive.setPower(
-                (dri + str + twi) * 1,
-                (dri - str - twi) * 1,
-                (dri - str + twi) * 1,
-                (dri + str - twi) * 1
-        );
+        boolean goSlow = gamepad.left_trigger > TRIGGER_THRESHOLD;
+
+
+        drive.setMecanumPower(dri, str, twi, goSlow);
     }
 
     @Override
