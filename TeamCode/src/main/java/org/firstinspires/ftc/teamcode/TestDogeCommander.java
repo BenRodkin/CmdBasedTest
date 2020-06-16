@@ -30,8 +30,8 @@ public class TestDogeCommander extends LinearOpMode implements DogeOpMode {
 
         commander.runCommandsParallel(
                 new TeleOpDriveControl(drive, gamepad1),
-                new TeleOpIntakeControl(intake, gamepad1),
                 new TeleOpFoundationControl(foundation, gamepad2)
+                new TeleOpIntakeControl(intake, gamepad2),
         );
 
 
