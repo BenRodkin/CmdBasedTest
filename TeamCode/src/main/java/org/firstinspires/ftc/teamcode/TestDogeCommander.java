@@ -8,9 +8,11 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.robot.commands.teleop.TeleOpDriveControl;
 import org.firstinspires.ftc.teamcode.robot.commands.teleop.TeleOpFoundationControl;
 import org.firstinspires.ftc.teamcode.robot.commands.teleop.TeleOpIntakeControl;
+import org.firstinspires.ftc.teamcode.robot.commands.teleop.TeleOpTapeDriveControl;
 import org.firstinspires.ftc.teamcode.robot.subsystems.Drive;
 import org.firstinspires.ftc.teamcode.robot.subsystems.Foundation;
 import org.firstinspires.ftc.teamcode.robot.subsystems.Intake;
+import org.firstinspires.ftc.teamcode.robot.subsystems.TapeDrive;
 
 @TeleOp
 public class TestDogeCommander extends LinearOpMode implements DogeOpMode {
@@ -20,18 +22,21 @@ public class TestDogeCommander extends LinearOpMode implements DogeOpMode {
         Drive drive = new Drive(hardwareMap);
         Intake intake = new Intake(hardwareMap);
         Foundation foundation = new Foundation(hardwareMap);
+        TapeDrive tapeDrive = new TapeDrive(hardwareMap);
 
         commander.registerSubsystem(drive);
         commander.registerSubsystem(intake);
         commander.registerSubsystem(foundation);
+        commander.registerSubsystem(tapeDrive);
         commander.init();
 
         waitForStart();
 
         commander.runCommandsParallel(
                 new TeleOpDriveControl(drive, gamepad1),
-                new TeleOpFoundationControl(foundation, gamepad2)
                 new TeleOpIntakeControl(intake, gamepad2),
+                new TeleOpFoundationControl(foundation, gamepad2),
+                new TeleOpTapeDriveControl(tapeDrive, gamepad2)
         );
 
 
