@@ -35,11 +35,19 @@ public class Drive implements Subsystem {
     }
 
     // Interface methods
-    public void setPower(double flPower, double frPower, double rlPower, double rrPower) {
-        this.flPower = flPower;
-        this.frPower = frPower;
-        this.rlPower = rlPower;
-        this.rrPower = rrPower;
+    public void setPower(double leftPower, double rightPower) {
+        this.flPower = leftPower;
+        this.frPower = rightPower;
+        this.rlPower = leftPower;
+        this.rrPower = rightPower;
+    }
+
+    public void setMecanumPower(double drive, double strafe, double twist, boolean goSlow) {
+        this.goSlow = goSlow ? SLOW : FAST;
+        flPower = (drive + strafe + twist) * this.goSlow;
+        frPower = (drive - strafe - twist) * this.goSlow;
+        rlPower = (drive - strafe + twist) * this.goSlow;
+        rrPower = (drive + strafe - twist) * this.goSlow;
     }
 
     @Override
