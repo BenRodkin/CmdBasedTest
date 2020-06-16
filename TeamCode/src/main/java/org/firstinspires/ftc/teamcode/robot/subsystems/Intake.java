@@ -2,9 +2,7 @@ package org.firstinspires.ftc.teamcode.robot.subsystems;
 
 import com.disnodeteam.dogecommander.Subsystem;
 import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
 
 public class Intake implements Subsystem {
     private HardwareMap hardwareMap;
