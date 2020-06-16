@@ -21,7 +21,7 @@ public class TeleOpDriveControl implements Command {
 
     @Override
     public void start() {
-        drive.setPower(0,0, 0,0);
+        drive.setPower(0,0);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class TeleOpDriveControl implements Command {
 
     @Override
     public void stop() {
-        drive.setPower(0,0,0,0);
+        drive.setPower(0,0);
     }
 
     @Override
