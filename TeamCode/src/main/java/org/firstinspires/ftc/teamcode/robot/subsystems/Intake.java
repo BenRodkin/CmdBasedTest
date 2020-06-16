@@ -10,32 +10,45 @@ public class Intake implements Subsystem {
     private CRServo intakeLeft;
     private CRServo intakeRight;
 
-    private double leftIntakePower = 0;
-    private double rightIntakePower = 0;
+    private State state = State.STOP;
+
+
 
     public Intake(HardwareMap hardwareMap){
         this.hardwareMap = hardwareMap;
     }
 
-    public void setPower(double power) {
-        leftIntakePower = power;
-        rightIntakePower = power;
+    public enum State {
+        INTAKE(1.0),
+        SPIT_OUT(-1.0),
+        STOP(0.0);
+
+        private final double power;
+
+        State(double power){
+            this.power = power;
+        }
     }
+
+    public void setState(State state){
+        this.state = state;
+    }
+
 
     @Override
     public void initHardware(){
         intakeLeft = hardwareMap.get(CRServo.class,"intake_left");
         intakeRight= hardwareMap.get(CRServo.class, "intake_right");
 
-        intakeRight.setDirection(CRServo.Direction.REVERSE);
+        // Reverse left side
+        intakeLeft.setDirection(CRServo.Direction.REVERSE);
 
     }
 
     @Override
     public void periodic(){
-        intakeRight.setPower(rightIntakePower);
-        intakeLeft.setPower(leftIntakePower);
-
-
+        intakeLeft.setPower(state.power);
+        intakeRight.setPower(state.power);
     }
+
 }

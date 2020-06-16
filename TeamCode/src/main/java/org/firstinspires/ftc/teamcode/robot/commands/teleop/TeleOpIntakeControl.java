@@ -12,28 +12,32 @@ public class TeleOpIntakeControl implements Command {
 
     private final double MAX_POWER = 0.6;
 
-    public TeleOpIntakeControl(Intake intake, Gamepad gamepad){
+    public TeleOpIntakeControl(Intake intake, Gamepad gamepad) {
         this.intake = intake;
         this.gamepad = gamepad;
     }
 
     @Override
-    public void start(){ intake.setPower(0);}
+    public void start() { intake.setState(Intake.State.STOP);}
 
     @Override
-    public void periodic(){
-        intake.setPower(
-                ((gamepad.left_bumper ? 1.0 : 0.0) - (gamepad.right_bumper ? 1.0 : 0.0) ) * MAX_POWER
-        );
+    public void periodic() {
+        if(gamepad.b) {
+            intake.setState(Intake.State.INTAKE);
+        } else if(gamepad.y) {
+            intake.setState(Intake.State.SPIT_OUT);
+        } else {
+            intake.setState(Intake.State.STOP);
+        }
     }
 
     @Override
-    public void stop(){
-        intake.setPower(0);
+    public void stop() {
+        intake.setState(Intake.State.STOP);
     }
 
     @Override
-    public boolean isCompleted(){
+    public boolean isCompleted() {
         return false;
     }
 }
