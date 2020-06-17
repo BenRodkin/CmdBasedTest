@@ -5,11 +5,13 @@ import com.disnodeteam.dogecommander.DogeOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+import org.firstinspires.ftc.teamcode.robot.commands.teleop.TeleOpArmControl;
 import org.firstinspires.ftc.teamcode.robot.commands.teleop.TeleOpCapstoneControl;
 import org.firstinspires.ftc.teamcode.robot.commands.teleop.TeleOpDriveControl;
 import org.firstinspires.ftc.teamcode.robot.commands.teleop.TeleOpFoundationControl;
 import org.firstinspires.ftc.teamcode.robot.commands.teleop.TeleOpIntakeControl;
 import org.firstinspires.ftc.teamcode.robot.commands.teleop.TeleOpTapeDriveControl;
+import org.firstinspires.ftc.teamcode.robot.subsystems.Arm;
 import org.firstinspires.ftc.teamcode.robot.subsystems.Capstone;
 import org.firstinspires.ftc.teamcode.robot.subsystems.Drive;
 import org.firstinspires.ftc.teamcode.robot.subsystems.Foundation;
@@ -26,12 +28,14 @@ public class TestDogeCommander extends LinearOpMode implements DogeOpMode {
         Foundation foundation   = new Foundation(hardwareMap);
         TapeDrive tapeDrive     = new TapeDrive(hardwareMap);
         Capstone capstone       = new Capstone(hardwareMap);
+        Arm arm                 = new Arm(hardwareMap);
 
         commander.registerSubsystem(drive);
         commander.registerSubsystem(intake);
         commander.registerSubsystem(foundation);
         commander.registerSubsystem(tapeDrive);
         commander.registerSubsystem(capstone);
+        commander.registerSubsystem(arm);
         commander.init();
 
         waitForStart();
@@ -41,6 +45,8 @@ public class TestDogeCommander extends LinearOpMode implements DogeOpMode {
                 new TeleOpIntakeControl(intake, gamepad2),
                 new TeleOpFoundationControl(foundation, gamepad2),
                 new TeleOpTapeDriveControl(tapeDrive, gamepad2),
+                new TeleOpCapstoneControl(capstone, gamepad2),
+                new TeleOpArmControl(arm, gamepad2),
         );
 
 
