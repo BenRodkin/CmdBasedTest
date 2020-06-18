@@ -11,6 +11,7 @@ import org.firstinspires.ftc.teamcode.robot.commands.teleop.TeleOpDriveControl;
 import org.firstinspires.ftc.teamcode.robot.commands.teleop.TeleOpFoundationControl;
 import org.firstinspires.ftc.teamcode.robot.commands.teleop.TeleOpGripperControl;
 import org.firstinspires.ftc.teamcode.robot.commands.teleop.TeleOpIntakeControl;
+import org.firstinspires.ftc.teamcode.robot.commands.teleop.TeleOpLiftControl;
 import org.firstinspires.ftc.teamcode.robot.commands.teleop.TeleOpTapeDriveControl;
 import org.firstinspires.ftc.teamcode.robot.subsystems.Arm;
 import org.firstinspires.ftc.teamcode.robot.subsystems.Capstone;
@@ -18,6 +19,7 @@ import org.firstinspires.ftc.teamcode.robot.subsystems.Drive;
 import org.firstinspires.ftc.teamcode.robot.subsystems.Foundation;
 import org.firstinspires.ftc.teamcode.robot.subsystems.Gripper;
 import org.firstinspires.ftc.teamcode.robot.subsystems.Intake;
+import org.firstinspires.ftc.teamcode.robot.subsystems.Lift;
 import org.firstinspires.ftc.teamcode.robot.subsystems.TapeDrive;
 
 @TeleOp
@@ -32,6 +34,7 @@ public class TestDogeCommander extends LinearOpMode implements DogeOpMode {
         Capstone capstone       = new Capstone(hardwareMap);
         Arm arm                 = new Arm(hardwareMap);
         Gripper gripper         = new Gripper(hardwareMap);
+        Lift lift               = new Lift(hardwareMap);
 
         commander.registerSubsystem(drive);
         commander.registerSubsystem(intake);
@@ -40,6 +43,7 @@ public class TestDogeCommander extends LinearOpMode implements DogeOpMode {
         commander.registerSubsystem(capstone);
         commander.registerSubsystem(arm);
         commander.registerSubsystem(gripper);
+        commander.registerSubsystem(lift);
         commander.init();
 
         waitForStart();
@@ -51,7 +55,8 @@ public class TestDogeCommander extends LinearOpMode implements DogeOpMode {
                 new TeleOpTapeDriveControl(tapeDrive, gamepad1),
                 new TeleOpCapstoneControl(capstone, gamepad2),
                 new TeleOpArmControl(arm, gamepad2),
-                new TeleOpGripperControl(gripper, gamepad2)
+                new TeleOpGripperControl(gripper, gamepad2),
+                new TeleOpLiftControl(lift, gamepad2)
         );
 
 
