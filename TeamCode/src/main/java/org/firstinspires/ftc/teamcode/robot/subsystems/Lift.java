@@ -19,7 +19,7 @@ public class Lift implements Subsystem {
 
     private double power;
 
-    public enum State{
+    public enum State {
         MANUAL (DcMotor.RunMode.RUN_WITHOUT_ENCODER),
         RESET (DcMotor.RunMode.RUN_TO_POSITION);
 
@@ -30,11 +30,11 @@ public class Lift implements Subsystem {
         }
     }
 
-    public Lift(HardwareMap hardwareMap){
+    public Lift(HardwareMap hardwareMap) {
         this.hardwareMap = hardwareMap;
     }
 
-    public void initHardware(){
+    public void initHardware() {
         pulleyLeft = hardwareMap.get(DcMotor.class, "pulley_left");
         pulleyRight = hardwareMap.get(DcMotor.class, "pulley_right");
 
@@ -49,7 +49,7 @@ public class Lift implements Subsystem {
 
     }
 
-    public void periodic(){
+    public void periodic() {
         pulleyLeft.setMode(state.runMode);
         pulleyRight.setMode(state.runMode);
 
@@ -63,23 +63,23 @@ public class Lift implements Subsystem {
 
     }
 
-    public void setPower(double power){
+    public void setPower(double power) {
         this.power = power;
     }
 
-    public void setState(State state){
+    public void setState(State state) {
         this.state = state;
     }
 
-    public void setTargetCounts(int target){
+    public void setTargetCounts(int target) {
         targetCounts = target;
     }
 
-    public int getTargetCounts(){
+    public int getTargetCounts() {
         return targetCounts;
     }
 
-    public boolean isBusy(){
+    public boolean isBusy() {
         return pulleyLeft.isBusy() && pulleyRight.isBusy();
     }
 }
