@@ -48,7 +48,7 @@ public class TestDogeCommander extends LinearOpMode implements DogeOpMode {
                 new TeleOpDriveControl(drive, gamepad1),
                 new TeleOpIntakeControl(intake, gamepad2),
                 new TeleOpFoundationControl(foundation, gamepad1),
-                new TeleOpTapeDriveControl(tapeDrive, gamepad2),
+                new TeleOpTapeDriveControl(tapeDrive, gamepad1),
                 new TeleOpCapstoneControl(capstone, gamepad2),
                 new TeleOpArmControl(arm, gamepad2),
                 new TeleOpGripperControl(gripper, gamepad2)
