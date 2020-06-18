@@ -11,8 +11,6 @@ public class Lift implements Subsystem {
     private DcMotor pulleyLeft;
     private DcMotor pulleyRight;
 
-    private int encoderCountsLeft;
-    private int encoderCountsRight;
     private int targetCounts = 0;
 
     private State state = State.MANUAL;
