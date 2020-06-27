@@ -49,6 +49,8 @@ public class Arm implements Subsystem {
         arm.setMode(runMode);
     }
 
+    public DcMotor.RunMode getRunMode(){ return arm.getMode(); }
+
     public void setTargetPos(int targetPos){
         this.targetPos = targetPos;
     }
@@ -57,8 +59,12 @@ public class Arm implements Subsystem {
         this.power = power;
     }
 
-    public DcMotor.RunMode getRunMode(){
-        return arm.getMode();
+    public int getPos() { return pos; }
+
+    public boolean armIsBusy() {
+        return arm.isBusy();
     }
+
+
 
 }
