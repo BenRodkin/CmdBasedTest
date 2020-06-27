@@ -51,7 +51,7 @@ public class GripperSetState implements Command {
     public void periodic(){
         if(timer.seconds() > waitTime){
             if (gripState != null) gripper.setGripState(gripState);
-            if (wristState == null) gripper.setWristState(wristState);
+            if (wristState != null) gripper.setWristState(wristState);
         }
     }
 
