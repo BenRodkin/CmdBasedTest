@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.robot.subsystems;
 
+import android.os.Environment;
+
 import com.disnodeteam.dogecommander.Subsystem;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
@@ -11,6 +13,12 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.teamcode.robot.commands.auto.SavePID;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Drive implements Subsystem {
     // Hardware map
@@ -34,7 +42,10 @@ public class Drive implements Subsystem {
     private double goSlow = FAST;
     private boolean initIMU;
 
-
+    // Heading offset
+    private float headingOffset;
+    private boolean hasHeadingOffset;
+    private Exception exception;
 
 
     // Constructor
@@ -43,6 +54,16 @@ public class Drive implements Subsystem {
         this.initIMU = initIMU;
     }
 
+    public Drive(HardwareMap hardwareMap) {
+        this.hardwareMap = hardwareMap;
+        this.initIMU = false;
+    }
+
+    public Drive(HardwareMap hardwareMap, boolean initIMU, boolean hasHeadingOffset) {
+        this.hardwareMap = hardwareMap;
+        this.initIMU = initIMU;
+        this.hasHeadingOffset = hasHeadingOffset;
+    }
 
 
     @Override
@@ -63,6 +84,18 @@ public class Drive implements Subsystem {
 
             imu = hardwareMap.get(BNO055IMU.class, "imu");
             imu.initialize(parameters);
+        }
+
+        headingOffset = 0f;
+        if(hasHeadingOffset){
+            try {
+                headingOffset = new SavePID(this).getHeading();
+            } catch (Exception e){
+                headingOffset= 1234;
+                exception = e;
+            }
+        } else {
+            headingOffset = 4321f;
         }
 
         // Reverse left side
@@ -129,6 +162,14 @@ public class Drive implements Subsystem {
 
     public float heading(){
         return imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle;
+    }
+
+    public float getHeadingOffset(){
+        return headingOffset;
+    }
+
+    public Exception getException(){
+        return exception;
     }
 
 
